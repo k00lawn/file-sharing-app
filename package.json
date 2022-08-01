@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "file-sharing-app",
+  "description": "Simple file sharing app with password protection",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k00lawn/file-sharing-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k00lawn/file-sharing-app/issues"
+  },
+  "homepage": "https://github.com/k00lawn/file-sharing-app#readme"
+}
