@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>File Sharing App</title>
 </head>
 <body>
-    <form style="display: grid;">
+    <form action="/upload" method="post" style="display: grid; gap: .5 rem; grid-template-columns: auto 1fr; 
+                max-width: 500px; margin: 0 auto;" enctype="multipart/form-data">
         <label for="file">File: </label>
         <input type="file" id="file" name="file" required>
         <label for="password">Password: </label>
         <input type="password" id="password" name="password" required>
+        <button style="grid-column: span 2;" type="submit">Submit</button>
     </form>
 </body>
 </html>
