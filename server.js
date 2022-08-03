@@ -1,10 +1,19 @@
+require("dotenv").config()
 const express = require('express')
 const multer = require('multer')
+const mongoose = require('mongoose');
 const upload = multer({ dest: 'uploads/' })
 
 const app = express()
 
-const port = 3000;
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb://localhost:27017/fileSharing', () => {
+    console.log("Connected to MongoDB")
+  }, (e) => console.log(e));
+}
+
 
 app.set('view engine', 'ejs')
 
@@ -17,6 +26,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log(`file-sharing app listening on port ${port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`file-sharing app listening on port ${process.env.PORT}`)
 })
