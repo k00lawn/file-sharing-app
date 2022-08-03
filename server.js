@@ -3,17 +3,14 @@ const express = require('express')
 const multer = require('multer')
 const mongoose = require('mongoose');
 const upload = multer({ dest: 'uploads/' })
+const bcrypt = require('bcrypt')
+const File = require('./models/File')
 
 const app = express()
 
-main().catch(err => console.log(err));
-
-async function main() {
-  await mongoose.connect('mongodb://localhost:27017/fileSharing', () => {
-    console.log("Connected to MongoDB")
-  }, (e) => console.log(e));
-}
-
+mongoose.connect(process.env.DATABASE_URL, () => {
+  console.log(`Connected to ${process.env.DATABASE_URL}`)
+})
 
 app.set('view engine', 'ejs')
 
@@ -21,8 +18,20 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  res.send('hi')
+app.post('/upload', upload.single('file'), async (req, res) => {
+
+  const fileData = {
+    path: req.file.path,
+    originalName: req.file.originalname
+  }
+
+  if(req.body.password !== null && req.body.password !== "") {
+    fileData.password = await bcrypt.hash(req.body.password, 10)
+  }
+
+  const file = await File.create(fileData)
+  console.log(file)
+  res.send(file.originalName)
 })
 
 
