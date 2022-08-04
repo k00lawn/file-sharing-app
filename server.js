@@ -43,7 +43,10 @@ app.route('/file/:id')
 
 async function handlePassword (req, res) {
   const file = await File.findById(req.params.id)
-  console.log(req.body.password)
+  if(file == null) {
+    res.render('password', {expired: true})
+    return
+  }
   if(file.password != null) {
     if(req.body.password == null) {
       res.render('password')

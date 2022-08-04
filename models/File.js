@@ -14,7 +14,8 @@ const File = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
-    }
+    },
+    expire_at: {type: Date, default: Date.now, expires: 600} 
 })
 
 module.exports = mongoose.model("File", File)
